@@ -1,3 +1,16 @@
-.board-row {
+.square {
+    border: 1px solid black;
+    padding: 30px;
+}
 
+.game {
+    display: inline-flex;
+}
+
+.game-board {
+    padding: 20px;
+}
+
+.game-status {
+    margin-top: 20px;
 }

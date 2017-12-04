@@ -60,17 +60,15 @@ class Game extends Component {
     handleClick(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
-        const squares = this.state.squares.slice();
+        const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
-            history: history.concat([
-                {
-                    squares: squares,
-                }
-            ]),
+            history: history.concat([{
+                squares: squares,
+            }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
         });
@@ -84,7 +82,7 @@ class Game extends Component {
     }
 
     render() {
-        const history = this.state.histroy;
+        const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
 
@@ -94,8 +92,9 @@ class Game extends Component {
                 'Go to game start';
             return (
                 <li key={move}>
-                    <button onClick={() =>
-                        this.jumpTo(move)}>{desc}</button>
+                    <button onClick={() => this.jumpTo(move)}>
+                        {desc}
+                    </button>
                 </li>
             );
         });
@@ -110,16 +109,16 @@ class Game extends Component {
 
         return (
             <div className="game">
+                <div className="game-info">
+                    <ol className='game-move'>{moves}</ol>
+                </div>
                 <div className="game-board">
                     <Board
                         squares={current.squares}
                         onClick={i => this.handleClick(i)}
                     />
                 </div>
-                <div className="game-info">
-                    <div>{status}</div>
-                    <ol>{moves}</ol>
-                </div>
+                    <div className='game-status'>{status}</div>
             </div>
         );
     }
