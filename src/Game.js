@@ -78,6 +78,7 @@ class Game extends Component {
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,
+            history: this.state.history.slice(0, step + 1)
         });
     }
 
